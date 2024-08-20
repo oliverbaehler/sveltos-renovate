@@ -1,0 +1,18 @@
+---
+apiVersion: lib.projectsveltos.io/v1beta1
+kind: EventTrigger
+metadata:
+  name: ingress-configuration
+spec:
+  sourceClusterSelector:
+    matchLabels:
+  helmCharts:
+  - repositoryURL:    https://projectcapsule.github.io/charts
+    repositoryName:   projectcapsule
+    chartName:        projectcapsule/capsule
+    chartVersion:     0.6.0
+    releaseName:      capsule
+    releaseNamespace: capsule-system
+    helmChartAction:  Install
+
+  

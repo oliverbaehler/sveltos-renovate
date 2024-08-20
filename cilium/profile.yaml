@@ -1,0 +1,70 @@
+---
+apiVersion: config.projectsveltos.io/v1beta1
+kind: ClusterProfile
+metadata:
+  name: networking
+spec:
+  syncMode: ContinuousWithDriftDetection
+  helmCharts:
+  - repositoryURL:    https://helm.cilium.io/
+    repositoryName:   cilium
+    chartName:        cilium/cilium
+    chartVersion:     1.15.6
+    releaseName:      kube-system-cilium
+    releaseNamespace: kube-system
+    helmChartAction:  Install
+    values: |
+      hostFirewall:
+        enabled: true
+      kubeProxyReplacement: false
+      containerRuntime:
+        integration: containerd
+      cluster:
+        name: {{ default "local" .Cluster.metadata.name }}
+      prometheus:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+      hubble:
+        enabled: true
+        relay:
+          enabled: true
+          prometheus:
+            enabled: true
+            serviceMonitor:
+              enabled: true
+        ui:
+          enabled: true
+        metrics:
+          serviceMonitor:
+            enabled: true
+          dashboards:
+            enabled: true
+            annotations:
+              grafana_folder: "Hubble"
+          enabled:
+          - dns:query;ignoreAAAA
+          - drop:sourceContext=identity;destinationContext=identity
+          - tcp
+          - flow
+          - icmp
+          # Enable additional labels for L7 flows
+          - 'httpV2:exemplars=true;labelsContext=source_ip,source_namespace,source_workload,destination_ip,destination_namespace,destination_workload,traffic_direction;sourceContext=workload-name|reserved-identity;destinationContext=workload-name|reserved-identity'
+        enableOpenMetrics: true
+      bpf:
+        masquerade: true
+      dashboards:
+        enabled: true
+        label: grafana_dashboard
+        namespace: ~
+        labelValue: "1"
+        annotations: {}
+      operator:
+        replicas: 1
+      gatewayAPI:
+        enabled: false
+      ingressController:
+        enabled: false
+        loadbalancerMode: dedicated
+      
+

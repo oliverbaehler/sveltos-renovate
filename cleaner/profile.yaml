@@ -1,0 +1,14 @@
+apiVersion: config.projectsveltos.io/v1beta1
+kind: Profile
+metadata:
+  name: cleaner
+spec:
+  syncMode: ContinuousWithDriftDetection
+  helmCharts:
+  - repositoryURL:    oci://ghcr.io/gianlucam76/charts/k8s-cleaner
+    repositoryName:   cleaner-oci
+    chartName:        oci://ghcr.io/gianlucam76/charts/k8s-cleaner
+    chartVersion:     0.4.0
+    releaseName:      k8s-cleaner
+    releaseNamespace: kube-system
+    helmChartAction:  Install
