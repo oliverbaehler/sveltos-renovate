@@ -1,4 +1,3 @@
----
 apiVersion: lib.projectsveltos.io/v1beta1
 kind: EventTrigger
 metadata:
