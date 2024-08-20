@@ -1,5 +1,6 @@
 {
-    "sveltos": {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json"
+   "sveltos": {
       "fileMatch": ["^.*/profile\\.yaml$"]
     }
-  }
+}
