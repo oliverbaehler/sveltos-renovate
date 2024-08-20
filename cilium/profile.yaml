@@ -2,6 +2,21 @@
 apiVersion: config.projectsveltos.io/v1beta1
 kind: ClusterProfile
 metadata:
+  name: networking-2
+spec:
+  syncMode: ContinuousWithDriftDetection
+  helmCharts:
+  - repositoryURL:    https://helm.cilium.io/
+    repositoryName:   cilium
+    chartName:        cilium/cilium
+    chartVersion:     1.15.6
+    releaseName:      kube-system-cilium
+    releaseNamespace: kube-system
+    helmChartAction:  Install
+---
+apiVersion: config.projectsveltos.io/v1beta1
+kind: ClusterProfile
+metadata:
   name: networking
 spec:
   syncMode: ContinuousWithDriftDetection
