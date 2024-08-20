@@ -8,7 +8,7 @@ spec:
   - repositoryURL:    oci://ghcr.io/gianlucam76/charts/k8s-cleaner
     repositoryName:   cleaner-oci
     chartName:        oci://ghcr.io/gianlucam76/charts/k8s-cleaner
-    chartVersion:     0.4.0
+    chartVersion:     0.6.0
     releaseName:      k8s-cleaner
     releaseNamespace: kube-system
     helmChartAction:  Install
