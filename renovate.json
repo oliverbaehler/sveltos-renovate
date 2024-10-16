@@ -1,6 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-   "sveltos": {
-      "fileMatch": ["^.*/profile\\.yaml$"]
-    }
+  "extends": ["config:recommended", ":dependencyDashboard"],
+  "sveltos": {
+      "fileMatch": ["^.*/*\\.yaml$"]
+  }
 }
